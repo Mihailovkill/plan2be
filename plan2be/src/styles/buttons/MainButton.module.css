@@ -1,0 +1,19 @@
+.linkButton {
+  margin: 0 10px;
+}
+
+.button {
+  background-color: #1d3544;
+  width: 90px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 10px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button:hover {
+  background-color: #305761; /* Lighter color for hover effect */
+  transform: scale(1.05); /* subtle grow effect on hover */
+}

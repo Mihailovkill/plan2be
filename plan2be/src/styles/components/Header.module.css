@@ -1,0 +1,22 @@
+.header {
+  background-color: #1e222e;
+  border-bottom: 1px solid lightgray;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.link {
+  text-decoration: none;
+  color: #305761; /* Using one of the colors you provided */
+  transition: color 0.3s ease;
+}
+
+.link:hover {
+  color: #1e222e; /* Darker color for hover effect */
+}
+
+.buttons {
+  display: flex;
+}
