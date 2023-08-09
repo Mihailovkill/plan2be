@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
-import styles from "@components/buttons/LoginButton.module.css";
+import Link from "next/link";
+import styles from "@/styles/buttons/LoginButton.module.css";
 
 const LoginButton: React.FC = () => {
   const loginButtonRef = useRef<HTMLButtonElement | null>(null);
@@ -17,14 +18,24 @@ const LoginButton: React.FC = () => {
     };
 
     loginButtonRef.current?.addEventListener("mousemove", handleMouseMove);
-    return () =>
-      loginButtonRef.current?.removeEventListener("mousemove", handleMouseMove);
+    return;
+
+    /* TODO: complete the logic for when hover is not active then the circle should disappear */
   }, []);
 
   return (
-    <button ref={loginButtonRef} className={styles.loginButton}>
-      Login
-    </button>
+    <Link href={"/login"}>
+      <button ref={loginButtonRef} className={styles.loginButton}>
+        <div className={styles.bigSpan}>
+          <span className={styles.span}>Sign in</span>
+        </div>
+        <div className={styles.smallSpan}>
+          <span className={styles.span}>
+            Welcome back! Here you can sign in <br /> to your existing account.
+          </span>
+        </div>
+      </button>
+    </Link>
   );
 };
 

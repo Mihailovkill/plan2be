@@ -1,11 +1,11 @@
-.loginButton {
+.registerButton {
   display: grid;
   grid-column: inherit;
   justify-content: left;
   padding-left: 15px;
   width: 531px;
   height: 144px;
-  background-color: #bdb6b6; /* Light gray */
+  background-color: #555860;
   border: none;
   outline: none;
   cursor: pointer;
@@ -18,7 +18,7 @@
 
 .bigSpan {
   font-size: x-large;
-  color: #333;
+  color: #e0e0e0;
   padding-top: 10px;
   padding-bottom: 5px;
 }
@@ -30,7 +30,7 @@
 
 .smallSpan {
   font-size: normal;
-  color: #333;
+  color: #e0e0e0;
   margin-top: 5px;
 }
 
@@ -40,29 +40,24 @@
   transition: color 0.3s ease;
 }
 
-.loginButton:hover .bigSpan,
-.loginButton:hover .smallSpan {
+.registerButton:hover .bigSpan,
+.registerButton:hover .smallSpan {
   color: #e6e6e6;
 }
 
-.loginButton:hover {
-  background-color: #616060; /* Dark gray */
+.registerButton:hover {
+  background-color: #3c3f44; /* Dark gray */
   color: #e6e6e6;
 }
 
-.loginButton::after {
+.registerButton::after {
   content: "";
   position: absolute;
   top: var(--y, 0);
   left: var(--x, 0);
-  width: 36px; /* Half of the original size */
-  height: 36px; /* Half of the original size */
-  background-color: rgba(
-    220,
-    224,
-    224,
-    0.5
-  ); /* A slightly transparent light gray for the spotlight */
+  width: 36px;
+  height: 36px;
+  background-color: rgba(220, 224, 224, 0.5);
   border-radius: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none;
