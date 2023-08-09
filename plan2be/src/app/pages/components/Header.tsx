@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styles from "styles/components/Header.module.css";
-import MainButton from "@components/pages/components/buttons/MainButton";
+import MainButton from "./buttons/MainButton";
 
 export default function Header() {
   return (

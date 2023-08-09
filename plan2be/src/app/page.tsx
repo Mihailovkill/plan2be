@@ -1,8 +1,10 @@
+"use client";
 import styles from "./index.module.css";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
-import MainButton from "@components/pages/components/buttons/MainButton";
+import MainButton from "./pages/components/buttons/MainButton";
+import LoginButton from "./pages/components/buttons/LoginButton";
 
 export default function Home() {
   return (
@@ -25,7 +27,9 @@ export default function Home() {
           />
         </div>
         <div className={styles.cardContainer}>
-          <div className={styles.card}></div>
+          <div className={styles.card}>
+            <LoginButton />
+          </div>
         </div>
       </main>
     </>
