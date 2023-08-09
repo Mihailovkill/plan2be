@@ -61,6 +61,12 @@
   border-radius: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
+}
+
+.registerButton:hover::after {
+  opacity: 1;
 }
 
 /* This creates the light gray shade that appears on hover */
