@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
-interface RegisterFormProps {}
-
-const RegisterForm: React.FC<RegisterFormProps> = () => {
+export default function Register() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -67,6 +65,4 @@ const RegisterForm: React.FC<RegisterFormProps> = () => {
       </div>
     </form>
   );
-};
-
-export default RegisterForm;
+}
