@@ -1,202 +1,216 @@
 generator client {
   provider = "prisma-client-js"
 }
+
 datasource db {
-  provider = "mysql"
-  url = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
 model User {
-    id                  Int                  @id @default(autoincrement())
-    username            String               @unique
-    email               String               @unique
-    password            String
-    profilePic          String?
-    bio                 String?
-    externalLinks       String?
-    joinedDate          DateTime?
-    userSkills          UserSkill[]
-    codeReviews         CodeReview[]         @relation("createdByUser")
-    codeReviewComments  CodeReviewComment[]
-    ratings             CodeReviewRating[]
-    forumPosts          ForumPost[]
-    tutorials           Tutorial[]
-    tutorialRatings     TutorialRating[]
-    createdChallenges   Challenge[]          @relation("createdByUser")
-    participatedChallenges UserChallenge[]
-    addedAPIs           API[]                @relation("addedByUser")
-    developerBlogs      DeveloperBlog[]
-    blogComments        BlogComment[]
-    tokens              Token[]
+  id                     Int                 @id @default(autoincrement())
+  username               String              @unique
+  email                  String              @unique
+  password               String
+  profilePic             String?
+  bio                    String?
+  externalLinks          String?
+  joinedDate             DateTime?
+  userSkills             UserSkill[]
+  codeReviews            CodeReview[]        @relation("createdByUser")
+  codeReviewComments     CodeReviewComment[]
+  ratings                CodeReviewRating[]
+  forumPosts             ForumPost[]
+  tutorials              Tutorial[]
+  tutorialRatings        TutorialRating[]
+  createdChallenges      Challenge[]         @relation("createdByUser")
+  participatedChallenges UserChallenge[]
+  addedAPIs              API[]               @relation("addedByUser")
+  developerBlogs         DeveloperBlog[]
+  blogComments           BlogComment[]
+  tokens                 Token[]
 }
 
 model UserSkill {
-    id          Int    @id @default(autoincrement())
-    userId      Int    
-    skillName   String
+  id        Int    @id @default(autoincrement())
+  userId    Int
+  skillName String
 
-    user        User   @relation(fields: [userId], references: [id])
-    @@index([userId])
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([userId])
 }
 
 model CodeReview {
-    id                Int                 @id @default(autoincrement())
-    codeTitle         String
-    codeDescription   String?
-    codeContent       String
-    userId            Int                 
-    createdAt         DateTime            @default(now())
-    updatedAt         DateTime            @default(now())
-    comments          CodeReviewComment[]
-    ratings           CodeReviewRating[]
+  id              Int                 @id @default(autoincrement())
+  codeTitle       String
+  codeDescription String?
+  codeContent     String
+  userId          Int
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @default(now())
+  comments        CodeReviewComment[]
+  ratings         CodeReviewRating[]
 
-    user              User                @relation("createdByUser", fields: [userId], references: [id])
-    @@index([userId])
+  user User @relation("createdByUser", fields: [userId], references: [id])
+
+  @@index([userId])
 }
 
 model CodeReviewComment {
-    id        Int        @id @default(autoincrement())
-    reviewId  Int        
-    userId    Int        
-    content   String
-    createdAt DateTime   @default(now())
+  id        Int      @id @default(autoincrement())
+  reviewId  Int
+  userId    Int
+  content   String
+  createdAt DateTime @default(now())
 
-    review    CodeReview @relation(fields: [reviewId], references: [id])
-    user      User       @relation(fields: [userId], references: [id])
-    @@index([reviewId])
-    @@index([userId])
+  review CodeReview @relation(fields: [reviewId], references: [id])
+  user   User       @relation(fields: [userId], references: [id])
+
+  @@index([reviewId])
+  @@index([userId])
 }
 
 model CodeReviewRating {
-    id        Int        @id @default(autoincrement())
-    reviewId  Int        
-    userId    Int        
-    score     Int
+  id       Int @id @default(autoincrement())
+  reviewId Int
+  userId   Int
+  score    Int
 
-    review    CodeReview @relation(fields: [reviewId], references: [id])
-    user      User       @relation(fields: [userId], references: [id])
-    @@index([reviewId])
-    @@index([userId])
+  review CodeReview @relation(fields: [reviewId], references: [id])
+  user   User       @relation(fields: [userId], references: [id])
+
+  @@index([reviewId])
+  @@index([userId])
 }
 
 model Forum {
-    id          Int           @id @default(autoincrement())
-    title       String
-    description String?
-    category    String
-    createdAt   DateTime      @default(now())
-    updatedAt   DateTime      @default(now())
-    posts       ForumPost[]
+  id          Int         @id @default(autoincrement())
+  title       String
+  description String?
+  category    String
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @default(now())
+  posts       ForumPost[]
 }
 
 model ForumPost {
-    id          Int    @id @default(autoincrement())
-    forumId     Int    
-    userId      Int    
-    content     String
-    createdAt   DateTime @default(now())
+  id        Int      @id @default(autoincrement())
+  forumId   Int
+  userId    Int
+  content   String
+  createdAt DateTime @default(now())
 
-    forum       Forum  @relation(fields: [forumId], references: [id])
-    user        User   @relation(fields: [userId], references: [id])
-    @@index([forumId])
-    @@index([userId])
+  forum Forum @relation(fields: [forumId], references: [id])
+  user  User  @relation(fields: [userId], references: [id])
+
+  @@index([forumId])
+  @@index([userId])
 }
 
 model Tutorial {
-    id           Int              @id @default(autoincrement())
-    title        String
-    content      String
-    userId       Int              
-    createdAt    DateTime         @default(now())
-    updatedAt    DateTime         @default(now())
-    ratings      TutorialRating[]
+  id        Int              @id @default(autoincrement())
+  title     String
+  content   String
+  userId    Int
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @default(now())
+  ratings   TutorialRating[]
 
-    user         User             @relation(fields: [userId], references: [id])
-    @@index([userId])
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([userId])
 }
 
 model TutorialRating {
-    id           Int    @id @default(autoincrement())
-    tutorialId   Int    
-    userId       Int    
-    score        Int
+  id         Int @id @default(autoincrement())
+  tutorialId Int
+  userId     Int
+  score      Int
 
-    tutorial     Tutorial @relation(fields: [tutorialId], references: [id])
-    user         User     @relation(fields: [userId], references: [id])
-    @@index([tutorialId])
-    @@index([userId])
+  tutorial Tutorial @relation(fields: [tutorialId], references: [id])
+  user     User     @relation(fields: [userId], references: [id])
+
+  @@index([tutorialId])
+  @@index([userId])
 }
 
 model Challenge {
-    id       Int            @id @default(autoincrement())
-    title    String
-    description String?
-    rules    String?
-    startDate  DateTime
-    endDate    DateTime
-    createdBy  Int          
-    participants UserChallenge[]
+  id           Int             @id @default(autoincrement())
+  title        String
+  description  String?
+  rules        String?
+  startDate    DateTime
+  endDate      DateTime
+  createdBy    Int
+  participants UserChallenge[]
 
-    creator User           @relation("createdByUser", fields: [createdBy], references: [id])
-    @@index([createdBy])
+  creator User @relation("createdByUser", fields: [createdBy], references: [id])
+
+  @@index([createdBy])
 }
 
 model UserChallenge {
-    id          Int      @id @default(autoincrement())
-    userId      Int      
-    challengeId Int      
+  id          Int @id @default(autoincrement())
+  userId      Int
+  challengeId Int
 
-    user        User     @relation(fields: [userId], references: [id])
-    challenge   Challenge @relation(fields: [challengeId], references: [id])
-    @@index([userId])
-    @@index([challengeId])
+  user      User      @relation(fields: [userId], references: [id])
+  challenge Challenge @relation(fields: [challengeId], references: [id])
+
+  @@index([userId])
+  @@index([challengeId])
 }
 
 model API {
-    id         Int    @id @default(autoincrement())
-    title      String
-    description String?
-    link       String
-    category   String
-    addedBy    Int   
+  id          Int     @id @default(autoincrement())
+  title       String
+  description String?
+  link        String
+  category    String
+  addedBy     Int
 
-    user       User   @relation("addedByUser", fields: [addedBy], references: [id])
-    @@index([addedBy])
+  user User @relation("addedByUser", fields: [addedBy], references: [id])
+
+  @@index([addedBy])
 }
 
 model DeveloperBlog {
-    id         Int          @id @default(autoincrement())
-    title      String
-    content    String
-    userId     Int          
-    createdAt  DateTime     @default(now())
-    updatedAt  DateTime     @default(now())
-    comments   BlogComment[]
+  id        Int           @id @default(autoincrement())
+  title     String
+  content   String
+  userId    Int
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @default(now())
+  comments  BlogComment[]
 
-    user       User         @relation(fields: [userId], references: [id])
-    @@index([userId])
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([userId])
 }
 
 model BlogComment {
-    id      Int           @id @default(autoincrement())
-    blogId  Int           
-    userId  Int           
-    content String
-    createdAt DateTime    @default(now())
+  id        Int      @id @default(autoincrement())
+  blogId    Int
+  userId    Int
+  content   String
+  createdAt DateTime @default(now())
 
-    blog    DeveloperBlog @relation(fields: [blogId], references: [id])
-    user    User          @relation(fields: [userId], references: [id])
-    @@index([blogId])
-    @@index([userId])
+  blog DeveloperBlog @relation(fields: [blogId], references: [id])
+  user User          @relation(fields: [userId], references: [id])
+
+  @@index([blogId])
+  @@index([userId])
 }
 
 model Token {
-    id        Int    @id @default(autoincrement())
-    token     String @unique
-    userId    Int    
-    expiry    DateTime
+  id     Int      @id @default(autoincrement())
+  token  String   @unique
+  userId Int
+  expiry DateTime
 
-    user      User   @relation(fields: [userId], references: [id])
-    @@index([userId])
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([userId])
 }

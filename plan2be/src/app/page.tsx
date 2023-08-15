@@ -36,6 +36,7 @@ export default function Home() {
       <header className={styles.header}>
         <MainButton text="About" href="/about" />
         <MainButton text="Contact" href="/contact" />
+        <MainButton text="Support" href="/support" />
       </header>
       <main className={styles.main}>
         <div className={styles.mainPic}>
